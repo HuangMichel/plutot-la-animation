@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Plutôt là, le livre animé de l’Isère</title>
+    <meta name="description" content="Le projet Plutôt là présenté dans un livre animé en 3D : l’affluence prévue des sites touristiques de l’Isère, un coin plus calme quand c’est plein, l’espace gestionnaire et le widget des offices de tourisme." />
+    <meta name="theme-color" content="#062A33" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content="Plutôt là, le livre animé de l’Isère" />
+    <meta property="og:description" content="C’est plein ? On vous trouve un coin plus calme, le bon moment et le chemin." />
+    <meta property="og:image" content="./og-image.png" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#contenu">Aller au contenu</a>
+
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <header class="bar">
+      <a class="brand" href="./" aria-label="Plutôt là, retour au livre">
+        <img src="./favicon.svg" alt="" width="44" height="44" />
+        <span>Plutôt là</span>
+      </a>
+      <nav class="links" aria-label="Le projet en ligne">
+        <a href="https://plutola.hackathon-flux-touristique.vicode.fr/">Ouvrir l’application</a>
+        <a href="https://sdk.hackathon-flux-touristique.vicode.fr/">Voir le widget</a>
+      </nav>
+    </header>
+
+    <div class="pins" id="pins"></div>
+
+    <nav class="tabs" aria-label="Pages du livre">
+      <div class="tabs-row">
+        <button type="button" class="auto" id="auto">
+          <svg class="icon-play" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4.5 3v10l8-5z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
+          <svg class="icon-pause" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" /></svg>
+          <span id="auto-label">Visite guidée</span>
+        </button>
+        <ul>
+          <li><button type="button" data-go="livre" aria-current="true">Le livre</button></li>
+          <li><button type="button" data-go="paladru">Le lac</button></li>
+          <li><button type="button" data-go="chemin">Le coin calme</button></li>
+          <li><button type="button" data-go="besoins">Vos besoins</button></li>
+          <li><button type="button" data-go="gestionnaire">Le gestionnaire</button></li>
+          <li><button type="button" data-go="widget">Le widget</button></li>
+        </ul>
+      </div>
+      <p class="hint">Molette ou flèches du clavier pour avancer. Glissez pour tourner le livre, Ctrl + molette pour zoomer.</p>
+    </nav>
+
+    <p class="sr" id="announce" aria-live="polite"></p>
+
+    <main class="panel" id="contenu" tabindex="-1">
+      <section class="stop is-active" id="livre" aria-labelledby="t-livre">
+        <h1 id="t-livre">C’est plein ? Plutôt là.</h1>
+        <p class="lead">Pour 2 872 sites touristiques de l’Isère, Plutôt là dit s’il y aura du monde. Quand c’est plein, il trouve un coin plus calme, le bon moment et le chemin.</p>
+        <p>Ce livre animé raconte le projet en cinq lieux. Laissez la visite guidée tourner les pages, ou touchez un lieu.</p>
+        <div class="actions">
+          <a class="btn btn-main" href="#paladru" data-go="paladru">Commencer par le lac</a>
+        </div>
+        <p class="fine">Projet du hackathon DGE « Gestion des flux touristiques ». Données ouvertes du hackathon et compteurs de passages : l’affluence est une estimation.</p>
+      </section>
+
+      <section class="stop" id="paladru" aria-labelledby="t-paladru">
+        <h2 id="t-paladru">Y aura-t-il du monde ?</h2>
+        <p>Lac de Paladru, samedi 11 juillet 2026, en vacances d’été. L’application estime l’affluence heure par heure, sur quatre niveaux.</p>
+
+        <div class="verdict" id="verdict" data-level="sature" role="status">
+          <span class="verdict-dot" aria-hidden="true"></span>
+          <p class="verdict-text"><strong id="verdict-name">Saturé</strong> <span id="verdict-advice">Site plein : mieux vaut aller ailleurs.</span></p>
+        </div>
+
+        <div class="hours">
+          <div class="bars" id="bars" aria-hidden="true"></div>
+          <label for="hour">Heure de la visite <output id="hour-out" for="hour">15 h</output></label>
+          <input type="range" id="hour" min="8" max="20" step="1" value="15" aria-describedby="hour-help" />
+          <div class="ticks" aria-hidden="true"><span>8 h</span><span>14 h</span><span>20 h</span></div>
+        </div>
+        <p class="fine" id="hour-help">Journée de démonstration du widget : très fréquenté jusqu’à 18 h, plus calme à partir de 20 h. La courbe du matin complète l’exemple.</p>
+        <div class="actions">
+          <a class="btn" href="#chemin" data-go="chemin">Et quand c’est plein ?</a>
+        </div>
+      </section>
+
+      <section class="stop" id="chemin" aria-labelledby="t-chemin">
+        <h2 id="t-chemin">Un coin plus calme, et le chemin</h2>
+        <p>Quand un site est plein, l’application ne s’arrête pas à l’alerte. Elle propose un lieu plus calme à proximité, avec l’itinéraire et des idées sur place : restaurant, pédalo, coucher de soleil, point de vue.</p>
+        <ul class="places">
+          <li><strong>Étang du Sauget</strong> Les Échelles, à 17 km</li>
+          <li><strong>Base de loisirs O’Lac de Romagnieu</strong> Romagnieu, à 19 km</li>
+        </ul>
+        <div class="actions">
+          <button type="button" class="btn btn-main" id="redirect" aria-pressed="false">Trouver un coin plus calme</button>
+        </div>
+        <p class="status" id="redirect-status" role="status">Le lac est saturé : 46 figurines sur la plage.</p>
+        <p class="fine">Les deux lieux sont ceux que le widget propose ce jour-là. Les figurines illustrent le principe, ce ne sont pas des comptages.</p>
+      </section>
+
+      <section class="stop" id="besoins" aria-labelledby="t-besoins">
+        <h2 id="t-besoins">Chacun ses besoins</h2>
+        <p>Avant de proposer un lieu, l’application pose sept questions en images : quand, à combien, comment, et vos besoins particuliers. Les lieux qui ne conviennent pas sont mis de côté.</p>
+        <fieldset class="choices" id="needs">
+          <legend>Avez-vous des besoins particuliers ?</legend>
+          <label><input type="radio" name="need" value="aucun" checked /><img src="./ill/besoin-aucun.svg" alt="" width="72" height="72" /><span>Aucun</span></label>
+          <label><input type="radio" name="need" value="fauteuil" /><img src="./ill/eclaireur-fauteuil.svg" alt="" width="72" height="72" /><span>Fauteuil roulant</span></label>
+          <label><input type="radio" name="need" value="canne" /><img src="./ill/eclaireur-canne.svg" alt="" width="72" height="72" /><span>Canne blanche</span></label>
+          <label><input type="radio" name="need" value="chien" /><img src="./ill/eclaireur-chien.svg" alt="" width="72" height="72" /><span>Avec un chien</span></label>
+        </fieldset>
+        <p class="status" id="need-rule" role="status">Aucun lieu n’est mis de côté.</p>
+        <p class="fine">Accessibilité non vérifiée : l’avis vient du type de lieu, des parkings et des arrêts à moins de 500 m.</p>
+      </section>
+
+      <section class="stop" id="gestionnaire" aria-labelledby="t-gestionnaire">
+        <h2 id="t-gestionnaire">Le gestionnaire prévient en deux gestes</h2>
+        <p>Celui qui gère un site signale qu’il est plein : il touche un niveau, puis publie. Le signalement remplace l’estimation chez le visiteur, et le site n’est plus proposé en alternative.</p>
+        <p>Il voit aussi les jours qui vont saturer sur deux semaines, avec la météo, décrit son lieu et propose un itinéraire bis.</p>
+        <div class="actions">
+          <button type="button" class="btn btn-main" id="signal" aria-pressed="false">Publier le signalement</button>
+          <a class="btn" href="https://plutola.hackathon-flux-touristique.vicode.fr/#/admin">Ouvrir l’espace gestionnaire</a>
+        </div>
+        <p class="status" id="signal-status" role="status">Lac du Lauvitel : chargé, d’après l’estimation.</p>
+        <p class="fine">Prototype sans connexion : les saisies restent dans le navigateur de la personne qui signale.</p>
+      </section>
+
+      <section class="stop" id="widget" aria-labelledby="t-widget">
+        <h2 id="t-widget">Deux lignes pour un office de tourisme</h2>
+        <p>Un office de tourisme colle le widget dans sa page. Il prend les couleurs du site et se calcule dans le navigateur : pas de compte, pas de clé, pas de serveur.</p>
+        <fieldset class="partners" id="partners">
+          <legend>Essayer avec les couleurs de</legend>
+        </fieldset>
+        <pre class="code" tabindex="0" aria-label="Code à coller dans la page"><code>&lt;script type="module" src="https://sdk.hackathon-flux-touristique.vicode.fr/embed/plutot-la-widget.js"&gt;&lt;/script&gt;
+&lt;plutot-la-widget partenaire="<span id="code-partner">pays-voironnais</span>" config="…"&gt;&lt;/plutot-la-widget&gt;</code></pre>
+        <div class="actions">
+          <a class="btn btn-main" href="https://sdk.hackathon-flux-touristique.vicode.fr/editor">Créer mon widget</a>
+        </div>
+        <p class="fine">Les cinq partenaires sont des démonstrations. L’attribut config, abrégé ici, contient le thème complet.</p>
+      </section>
+    </main>
+
+    <noscript>
+      <p class="notice">Le livre animé a besoin de JavaScript. Tout le contenu reste lisible ci-dessus.</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,397 @@
+/* The presentation's own tokens (src/style.css), at the size of a 1080p frame. */
+.film {
+  --encre: #0b3540;
+  --creme: #fef4e1;
+  --papier: #fffcf5;
+  --soleil: #ffc941;
+  --soleil-clair: #ffe19e;
+  --nuit: #02222b;
+  --table: #062a33;
+  --texte-doux: #2e5560;
+  --ciel: #cdebe6;
+  --titre: 'Fredoka Variable', 'Fredoka', ui-rounded, system-ui, sans-serif;
+  --texte: 'Nunito Variable', 'Nunito', system-ui, sans-serif;
+
+  background: var(--table);
+  color: var(--encre);
+  font: 600 30px/1.36 var(--texte);
+  -webkit-font-smoothing: antialiased;
+}
+
+.film canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.film h1,
+.film h2,
+.film p,
+.film pre {
+  margin: 0;
+}
+
+/* ---- Words laid on the table: before the book opens, after it closes ------ */
+
+.words {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  gap: 30px;
+  color: var(--creme);
+}
+
+.words > * {
+  transform-origin: 50% 100%;
+}
+
+.words h1 {
+  font: 600 96px/0.98 var(--titre);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.words .lead {
+  font: 500 45px/1.16 var(--titre);
+  text-wrap: balance;
+}
+
+.words .link {
+  font: 500 38px/1.15 var(--titre);
+}
+
+.words .link b {
+  display: block;
+  padding-top: 6px;
+  font: 800 30px/1.2 var(--texte);
+  color: var(--soleil);
+}
+
+.words .fine {
+  max-width: 660px;
+  font-size: 23px;
+  line-height: 1.45;
+  color: var(--ciel);
+}
+
+.fade {
+  position: absolute;
+  inset: 0;
+  background: #01171e;
+}
+
+/* ---- Cards: paper that stands up on its lower edge, like the book's own --- */
+
+.card {
+  position: absolute;
+  left: 88px;
+  bottom: 72px;
+  box-sizing: border-box;
+  width: 720px;
+  display: grid;
+  gap: 22px;
+  padding: 42px 46px 46px;
+  border-radius: 30px;
+  background: var(--creme);
+  box-shadow: 0 4px 12px rgba(1, 23, 30, 0.3), 0 44px 90px -24px rgba(1, 23, 30, 0.6);
+  transform-origin: 50% 100%;
+}
+
+.card h2 {
+  font: 600 56px/1.05 var(--titre);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.card p {
+  text-wrap: pretty;
+}
+
+.card .even {
+  text-wrap: balance;
+}
+
+.card .place {
+  margin-bottom: -10px;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 1.2;
+  color: var(--texte-doux);
+}
+
+.card .status {
+  min-height: 82px;
+  font-weight: 700;
+}
+
+/* The scene's sun falls on the cards too. */
+.card .light {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  mix-blend-mode: multiply;
+}
+
+.hours {
+  display: grid;
+  gap: 12px;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  align-items: end;
+  gap: 8px;
+  height: 132px;
+}
+
+.bars i {
+  display: block;
+  border-radius: 9px 9px 4px 4px;
+  background: var(--c);
+  transform-origin: bottom;
+}
+
+.ticks {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  font: 700 23px/30px var(--texte);
+  color: var(--texte-doux);
+  font-variant-numeric: tabular-nums;
+}
+
+.ticks b {
+  position: absolute;
+  top: 0;
+  width: 90px;
+  margin-left: -45px;
+  text-align: center;
+  font: 600 30px/30px var(--titre);
+  color: var(--encre);
+}
+
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 92px;
+  padding: 14px 22px;
+  background: var(--papier);
+  border: 4px solid var(--encre);
+  border-radius: 26px;
+}
+
+.verdict i {
+  flex: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--c);
+  border: 4px solid var(--encre);
+}
+
+.verdict p {
+  font-size: 27px;
+  line-height: 1.25;
+}
+
+.verdict strong {
+  display: block;
+  font: 600 42px/1.08 var(--titre);
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.levels span {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 14px 4px 12px;
+  background: var(--papier);
+  border: 4px solid var(--encre);
+  border-radius: 24px;
+  font: 600 26px/1.1 var(--titre);
+}
+
+.levels span.is-on {
+  background: var(--soleil-clair);
+  box-shadow: inset 0 0 0 4px var(--encre);
+}
+
+.levels i {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 4px solid var(--encre);
+  background: var(--c);
+}
+
+.btn {
+  position: relative;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 78px;
+  padding: 0 40px;
+  border: 4px solid var(--encre);
+  border-radius: 999px;
+  background: var(--soleil);
+  font: 600 32px/1.2 var(--titre);
+}
+
+.btn.is-done {
+  background: var(--papier);
+}
+
+.tap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  border-radius: 50%;
+  background: rgba(11, 53, 64, 0.2);
+  border: 4px solid rgba(11, 53, 64, 0.6);
+}
+
+.code {
+  position: relative;
+  padding: 20px 26px 22px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--nuit);
+  color: var(--creme);
+  font: 21px/1.7 ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  white-space: pre;
+}
+
+.code b {
+  font-weight: inherit;
+  color: var(--soleil);
+}
+
+.code::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 110px;
+  background: linear-gradient(90deg, rgba(2, 34, 43, 0), var(--nuit) 78%);
+}
+
+.code .flash {
+  position: absolute;
+  inset: 0;
+  background: var(--soleil);
+}
+
+.partner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 700;
+  transform-origin: 0 50%;
+}
+
+.partner .swatch {
+  display: flex;
+  padding-left: 8px;
+}
+
+.partner .swatch i {
+  width: 30px;
+  height: 30px;
+  margin-left: -8px;
+  border: 4px solid var(--encre);
+  border-radius: 50%;
+}
+
+.partner em {
+  padding: 3px 14px 5px;
+  border: 3px solid var(--encre);
+  border-radius: 999px;
+  font: 600 22px/1.1 var(--titre);
+}
+
+/* ---- Pins: the presentation's map labels, held to a point of the book ------ */
+
+.pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 14px;
+  padding: 10px 26px 12px 18px;
+  border: 4px solid var(--encre);
+  border-radius: 999px;
+  background: var(--creme);
+  font: 600 30px/1.1 var(--titre);
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(11, 53, 64, 0.18), 0 12px 32px 4px rgba(11, 53, 64, 0.14);
+  transform-origin: 50% calc(100% + 16px);
+}
+
+.pin::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 22px;
+  height: 22px;
+  background: inherit;
+  border: solid var(--encre);
+  border-width: 0 4px 4px 0;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.pin.is-plain {
+  grid-template-columns: auto;
+  padding-left: 26px;
+}
+
+.pin i {
+  width: 28px;
+  height: 28px;
+  border: 4px solid var(--encre);
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.pin small {
+  display: block;
+  margin-top: 3px;
+  font: 700 23px/1.1 var(--texte);
+  color: var(--texte-doux);
+}
+
+/* The two that carry the film: the question on the full lake, the answer on the quiet pond. */
+.pin.is-hero {
+  padding: 24px 60px 32px;
+  border-width: 7px;
+  font-size: 92px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  box-shadow: 0 4px 10px rgba(1, 23, 30, 0.25), 0 30px 70px -10px rgba(1, 23, 30, 0.5);
+  transform-origin: 50% calc(100% + 31px);
+}
+
+.pin.is-hero::after {
+  bottom: -29px;
+  width: 44px;
+  height: 44px;
+  border-width: 0 7px 7px 0;
+}
+
+.pin.is-sun {
+  background: var(--soleil);
+}

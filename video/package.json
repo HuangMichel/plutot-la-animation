@@ -1,0 +1,16 @@
+{
+  "name": "plutot-la-le-film",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Film out/plutot-la.mp4",
+    "poster": "remotion still Film out/affiche.png --frame=930"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.540",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.540"
+  }
+}
